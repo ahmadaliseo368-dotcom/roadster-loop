@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roadster Loop – Night Stunt Racing</title>
+<meta name="description" content="Roadster Loop is a 3D night stunt racing game. React to the lights, launch an electric roadster through a loop, fly off the ramp and stick the landing.">
+<meta name="theme-color" content="#06080b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="scene" aria-label="Roadster Loop 3D game view"></canvas>
+<div id="speedfx"></div><div id="vignette"></div><div id="flash"></div>
+
+<div id="lights" aria-hidden="true"><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span></div>
+
+<div id="hud" hidden>
+  <div class="hud-top">
+    <div class="stat"><label>Distance</label><b id="distVal">0</b><small>m</small></div>
+    <div class="stat score"><label>Score</label><b id="scoreVal">0</b></div>
+    <div class="stat"><label>Best</label><b id="bestVal">0</b></div>
+    <div class="hud-btns">
+      <button id="muteBtn" class="ghost" aria-label="Toggle sound">Sound on</button>
+      <button id="restartBtn" class="ghost">Restart</button>
+    </div>
+  </div>
+  <div class="hud-bottom">
+    <div id="speedo">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18a8ff"/><stop offset="1" stop-color="#00ff9c"/></linearGradient></defs>
+        <circle cx="60" cy="60" r="52" class="g-bg" transform="rotate(135 60 60)"/>
+        <circle cx="60" cy="60" r="52" class="g-fg" id="gaugeFg" transform="rotate(135 60 60)"/>
+      </svg>
+      <div class="speed-read"><b id="speedVal">0</b><small>km/h</small></div>
+    </div>
+    <div class="stat react"><label>Reaction</label><b id="reactVal">–</b><small>s</small></div>
+    <div class="stat" id="airBox"><label>Air</label><b id="airVal">–</b></div>
+  </div>
+</div>
+
+<div id="banner" role="status" aria-live="polite"><h2 id="bannerTitle"></h2><p id="bannerSub"></p></div>
+
+<div id="touch" hidden>
+  <button id="tLeft" aria-label="Rotate left">&#9664;</button>
+  <button id="tGo" aria-label="Launch">LAUNCH</button>
+  <button id="tRight" aria-label="Rotate right">&#9654;</button>
+</div>
+
+<section id="menu">
+  <div class="menu-card">
+    <h1>Roadster<br>Loop</h1>
+    <p class="tag">Read the lights. Hit the loop. Fly the ramp. Land it.</p>
+    <button id="startBtn" class="cta">Start game</button>
+    <div class="how">
+      <h3>Controls</h3>
+      <ul>
+        <li><kbd>Space</kbd><span>Launch on the green light. Too early and you are out.</span></li>
+        <li><kbd>&larr;</kbd><span>Rotate the nose up in the air</span></li>
+        <li><kbd>&rarr;</kbd><span>Rotate the nose down in the air</span></li>
+        <li><kbd>R</kbd><span>Restart the run</span></li>
+        <li><kbd>M</kbd><span>Mute or unmute</span></li>
+      </ul>
+      <p class="hint">On a phone, use the on-screen buttons. Land with the wheels down, within about 24&deg; of level. A faster reaction gives a faster launch.</p>
+    </div>
+  </div>
+</section>
+
+<section id="result" hidden>
+  <div class="result-card">
+    <h2 id="resTitle">Run complete</h2>
+    <p id="resSub"></p>
+    <table>
+      <tr><td>Distance</td><td id="rDist">0</td></tr>
+      <tr><td>Air time</td><td id="rAir">0</td></tr>
+      <tr><td>Flips</td><td id="rFlip">0</td></tr>
+      <tr><td>Reaction bonus</td><td id="rReact">0</td></tr>
+      <tr><td>Landing bonus</td><td id="rLand">0</td></tr>
+      <tr class="total"><td>Total score</td><td id="rTotal">0</td></tr>
+    </table>
+    <button id="againBtn" class="cta">Race again</button>
+  </div>
+</section>
+
+<footer id="foot">Unofficial fan game, not affiliated with Tesla.</footer>
+
+<noscript><div class="fatal">Roadster Loop needs JavaScript enabled.</div></noscript>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
